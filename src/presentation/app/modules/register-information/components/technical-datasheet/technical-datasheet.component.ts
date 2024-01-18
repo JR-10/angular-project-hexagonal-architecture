@@ -85,12 +85,13 @@ const NAMES: string[] = [
 })
 export class TechnicalDatasheetComponent {
 
-  form = new FormGroup({
+  // estructura del formulario
+  formFilters = new FormGroup({
     product:new FormControl(''),
     manager:new FormControl(''),
     state:new FormControl(''),
-    start: new FormControl(new Date(year, month, 13)),
-    end: new FormControl(new Date(year, month, 16)),
+    start: new FormControl(''),
+    end: new FormControl(''),
   });
 
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
@@ -102,12 +103,13 @@ export class TechnicalDatasheetComponent {
   constructor() {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
+    // this.loadForm; // lanzar el formuelario
   }
+
   send():void {
-    console.log(this.form.value);
+    console.log(this.formFilters.value);
   }
 
   ngAfterViewInit() {
