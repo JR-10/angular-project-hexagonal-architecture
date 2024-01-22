@@ -70,7 +70,7 @@ export class TechnicalDatasheetComponent {
 
   displayedColumns: string[] = [/*'id',*/ 'product', 'nameManager', 'modificationDate', 'state', 'actions'];
   // displayedColumns: ColumnTable[] = [];
-  dataSource!: MatTableDataSource<IProduct>;
+  dataSource: MatTableDataSource<IProduct> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -88,6 +88,10 @@ export class TechnicalDatasheetComponent {
     this.dataSource.sort = this.sort;
   }
 
+  /**
+   * @description Metodo para hacer busqueda rapida en la tabla
+   * @param event
+   */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -97,6 +101,9 @@ export class TechnicalDatasheetComponent {
     }
   }
 
+  /**
+   * @description Metodo para obtener la data para alimentar la tabla
+   */
   getPodutsExample() {
     this.productUseCase.excecute().subscribe({
       next: (resp: IResponseDataProduct) => {

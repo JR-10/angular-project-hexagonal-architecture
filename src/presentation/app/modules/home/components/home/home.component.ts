@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductRepository } from '../../../../../../domain/repositories/product/product.repository';
 import { IProduct, IResponseDataProduct } from 'src/domain/models/product/product';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatButtonModule
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

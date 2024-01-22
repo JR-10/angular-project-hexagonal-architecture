@@ -1,11 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+/*************************************** Configuraciones Iniciales *********************************************************/
+// /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-/* Angular Material */
+// /* Angular Material */
 // @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+// /* Tailwind */
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+
+// /* Se colocar por conflicto de estilos en elemento <mat-form-field>*/
+// .mdc-notched-outline__notch {
+//   border-right: none;
+// }
+
+
+/*************************************** Configuraciones Secundarias *********************************************************/
+@use "presentation/assets/scss/variables";
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+@use 'presentation/assets/scss/palette' as palette;
 
 /* Tailwind */
 @tailwind base;
@@ -13,7 +35,119 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @tailwind utilities;
 
 
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$GIC_CENIT-primary: mat.define-palette(mat.$indigo-palette);
+$GIC_CENIT-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+$GIC_CENIT-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$GIC_CENIT-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $GIC_CENIT-primary,
+      accent: $GIC_CENIT-accent,
+      warn: $GIC_CENIT-warn
+    )
+  )
+);
+
+@mixin app-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $linkColor: mat.get-color-from-palette($primary, lighter);
+  $linkColorHover: mat.get-color-from-palette($primary, darker);
+  $accentColor: mat.get-color-from-palette($accent);
+  $primaryColor: mat.get-color-from-palette($primary);
+  $warnColor: mat.get-color-from-palette($warn);
+  /*
+  With a single theme, you can use
+  css var to set color in tailwind,
+  take a look at tailwind.config.js file.
+  */
+  // :root {
+  //   --app-accent-color: #{$accentColor};
+  //   --app-primary-color: #{$primaryColor};
+  //   --app-warn-color: #{$warnColor};
+  //   --app-link-color: #{$linkColor};
+  //   --app-link-hover-color: #{$linkColorHover};
+  // }
+
+  // .mat-button,
+  // .mat-flat-button,
+  // .mat-raised-button,
+  // .mat-stroked-button {
+  //   text-transform: uppercase;
+  //   background-color:#239f39 !important;
+  // }
+  // .mat-mdc-select-value {
+  //   color: #fff !important;
+  // }
+  // .settings .mat-mdc-select-value {
+  //   color: var(--app-accent-color) !important;
+  // }
+  // .settings .mat-mdc-select-arrow {
+  //   color: var(--app-accent-color) !important;
+  // }
+  // .mat-mdc-select-arrow {
+  //   color: #fff !important;
+  // }
+}
+
+@include app-theme($GIC_CENIT-theme);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($GIC_CENIT-theme);
+
 /* Se colocar por conflicto de estilos en elemento <mat-form-field>*/
-.mdc-notched-outline__notch {
-  border-right: none;
+// .mdc-notched-outline__notch {
+//   border-right: none;
+// }
+
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
+  .mdc-notched-outline__notch {
+  border-right-style: hidden;
+}
+
+.mat-mdc-input-element {
+  box-shadow: none !important;
+}
+
+.sticky {
+  position: sticky !important;
+}
+
+[type='text'],
+[type='email'],
+[type='url'],
+[type='password'],
+[type='number'],
+[type='date'],
+[type='datetime-local'],
+[type='month'],
+[type='search'],
+[type='tel'],
+[type='time'],
+[type='week'],
+[multiple],
+textarea,
+select {
+  padding: 0;
+  border: none;
 }
