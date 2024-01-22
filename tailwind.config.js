@@ -25,6 +25,14 @@ module.exports = {
     },
     extend: {
       colors: {
+        main:'#e4ecfb',
+        textSuccess: '#76c432',
+        btnSuccess: '#a6db75',
+        textWarning: '#fe5947',
+        btnWarning: '#feb5ae',
+        rounded: '#79d7ea',
+        title:'#3993b5',
+
         primary: {
           50: "var(--primary-50)",
           100: "var(--primary-100)",

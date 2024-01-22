@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { ProductRepository } from '../../../domain/repositories/product/product.repository';
-import { IProduct, IResponseDataProduct } from 'src/domain/models/product/product';
+import { IResponseDataProduct } from 'src/domain/models/product/product';
 
 export class ProductUseCase {
 
