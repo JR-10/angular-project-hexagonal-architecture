@@ -1,8 +1,7 @@
 import { Observable } from 'rxjs';
+import { ResponseDataProductModel } from '../../models/product/product-response-model';
 
-import { IResponseDataProduct } from '../../models/product/product';
 
 export abstract class ProductRepository {
-  abstract getAllProductsRepository(): Observable<IResponseDataProduct>;
-
+  abstract getAllProductsRepository(params:{}): Observable<ResponseDataProductModel>;
 }

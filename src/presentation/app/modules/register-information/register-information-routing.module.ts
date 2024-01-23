@@ -2,11 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: '/home',
-  //   pathMatch: 'full'
-  // },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: '',
     loadComponent: () =>
@@ -14,7 +10,6 @@ const routes: Routes = [
         './components/technical-datasheet/technical-datasheet.component'
       ).then((m) => m.TechnicalDatasheetComponent),
   },
-
 ];
 
 @NgModule({

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterInformationRoutingModule } from './register-information-routing.module';
 import { ProductRepository } from '../../../../domain/repositories/product/product.repository';
-import { ProductRepositoryImpl } from '../../../../infraestructure/ports/product.repository.impl';
 import { ProductUseCase } from '../../../../application/useCases/product/product.usecase';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductAdapterService } from '../../../../infraestructure/adapters/product/product-adapter.service';
 
 
 const productUseCaseFactory = (productRepo: ProductRepository) => new ProductUseCase(productRepo);
@@ -22,7 +22,7 @@ export const ProductUseCaseProvider = {
   ],
   providers: [
     ProductUseCaseProvider,
-    { provide: ProductRepository, useClass: ProductRepositoryImpl },
+    { provide: ProductRepository, useClass: ProductAdapterService },
   ]
 })
 export class RegisterInformationModule { }

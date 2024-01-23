@@ -1,12 +1,11 @@
 import { Observable } from 'rxjs';
 import { ProductRepository } from '../../../domain/repositories/product/product.repository';
-import { IResponseDataProduct } from 'src/domain/models/product/product';
+import { UseCase } from '../../../base/use-case';
+import { ResponseDataProductModel } from '../../../domain/models/product/product-response-model';
 
-export class ProductUseCase {
-
+export class ProductUseCase implements UseCase<{}, ResponseDataProductModel> {
   constructor(private productRepository: ProductRepository) {}
-
-  excecute():Observable<IResponseDataProduct>{
-    return this.productRepository.getAllProductsRepository();
+  execute(params: {}): Observable<ResponseDataProductModel> {
+    return this.productRepository.getAllProductsRepository(params);
   }
 }

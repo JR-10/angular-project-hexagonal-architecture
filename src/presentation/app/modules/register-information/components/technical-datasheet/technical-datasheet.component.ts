@@ -20,10 +20,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ProductUseCase } from '../../../../../../application/useCases/product/product.usecase';
 import { CONSTANTS_TECHNICAL_DATASHEET } from '../../constants';
 import { ColumnTable } from '../../../../../../domain/models/general.models';
-import {
-  IProduct,
-  IResponseDataProduct,
-} from 'src/domain/models/product/product';
+import { ProductModel } from '../../../../../../domain/models/product/product-model';
+import { ResponseDataProductModel } from '../../../../../../domain/models/product/product-response-model';
 
 // campo fechas
 const today = new Date();
@@ -57,7 +55,7 @@ const year = today.getFullYear();
   styleUrls: ['./technical-datasheet.component.scss'],
 })
 export class TechnicalDatasheetComponent {
-  dataResponse: IProduct[] = [];
+  dataResponse: ProductModel[] = [];
 
   // estructura del formulario
   formFilters = new FormGroup({
@@ -70,7 +68,7 @@ export class TechnicalDatasheetComponent {
 
   displayedColumns: string[] = [/*'id',*/ 'product', 'nameManager', 'modificationDate', 'state', 'actions'];
   // displayedColumns: ColumnTable[] = [];
-  dataSource: MatTableDataSource<IProduct> = new MatTableDataSource();
+  dataSource: MatTableDataSource<ProductModel> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -105,8 +103,8 @@ export class TechnicalDatasheetComponent {
    * @description Metodo para obtener la data para alimentar la tabla
    */
   getPodutsExample() {
-    this.productUseCase.excecute().subscribe({
-      next: (resp: IResponseDataProduct) => {
+    this.productUseCase.execute({}).subscribe({
+      next: (resp: ResponseDataProductModel) => {
         // this.displayedColumns = CONSTANTS_TECHNICAL_DATASHEET.DISPLAYED_COLUMNS;
         this.dataSource = new MatTableDataSource(resp.data);
         this.dataSource.paginator = this.paginator;
