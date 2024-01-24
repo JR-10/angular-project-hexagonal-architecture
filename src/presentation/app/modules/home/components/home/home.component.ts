@@ -16,16 +16,12 @@ export class HomeComponent implements OnInit {
   public lineChart!: Chart;
   public barChart!: Chart;
 
-  imagenUrl = `${environment.imageURL}/ima1.jpg`;
+  imagenUrl = `${environment.imageURL}`;
 
   constructor() {}
 
   ngOnInit(): void {
     console.log('Componente Home');
-    console.log('valor de imanUrl: ', this.imagenUrl);
-
-    this.loadLineChart();
-    this.loadBoardChart();
   }
 
   loadLineChart(){
